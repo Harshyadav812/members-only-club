@@ -1,0 +1,24 @@
+{
+  "name": "members-only-club",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Harshyadav812/members-only-club#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harshyadav812/members-only-club.git"
+  },
+  "license": "ISC",
+  "author": "Harsh",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.9",
+    "pg": "^8.14.1"
+  }
+}
