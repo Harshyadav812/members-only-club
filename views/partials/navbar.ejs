@@ -1,0 +1,20 @@
+<nav class="navbar">
+  <% if(locals.user) {%>
+  <div class="nav-brand">
+    <a href="/"> Welcome <%=user.first_name %></a>
+  </div>
+  <div class="nav-links">
+    <a href="/log-out" class="nav-link">Logout</a>
+    <a href="/member" class="nav-link">Become Member</a>
+  </div>
+
+  <%} else { %>
+  <div class="nav-brand">
+    <a href="/">FightClub</a>
+  </div>
+  <div class="nav-links">
+    <a href="/login" class="nav-link">Login</a>
+    <a href="/signup" class="nav-link">Sign Up</a>
+  </div>
+  <%}%>
+</nav>

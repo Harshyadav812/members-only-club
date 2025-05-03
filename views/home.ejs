@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FightClub</title>
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/signup.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+
+    <main class="container">
+      <div class="hero">
+        <h1>Welcome to FightClub</h1>
+        <p class="tagline">
+          The first rule of FightClub: You do not talk about FightClub.
+        </p>
+      </div>
+
+      <div class="content">
+        <div class="card">
+          <h2>About Us</h2>
+          <p>
+            We are a community of individuals who have lost everything. We are
+            the middle children of history, raised by television to believe that
+            someday we'll be millionaires and movie stars and rock stars, but we
+            won't.
+          </p>
+          <div class="quotes">
+            <p class="quote">
+              "You are not your job, you're not how much money you have in the
+              bank. You are not the car you drive. You're not the contents of
+              your wallet."
+            </p>
+            <p class="quote">
+              "It's only after we've lost everything that we're free to do
+              anything."
+            </p>
+          </div>
+        </div>
+
+        <% if(locals.user) {%>
+          <div class="card">
+            <h2>Become a Member</h2>
+            <p>
+              Become a member of our private club and discover what you're truly
+              capable of. 
+            </p>
+        <%} else {%>
+
+        <div class="card">
+          <h2>Join Us</h2>
+          <p>
+            It's only after we've lost everything that we're free to do
+            anything. Join our exclusive club and discover what you're truly
+            capable of.
+          </p>
+
+        <%}%>
+
+
+          <% if(locals.user) {%>
+          <a href="/member" class="signup-button">Become Member</a>
+          <%} else {%>
+          <a href="/signup" class="signup-button">Sign Up</a>
+          <%}%>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
