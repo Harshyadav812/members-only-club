@@ -41,13 +41,23 @@
           </div>
         </div>
 
-        <% if(locals.user) {%>
-          <div class="card">
-            <h2>Become a Member</h2>
-            <p>
-              Become a member of our private club and discover what you're truly
-              capable of. 
-            </p>
+        <% if(locals.user && !locals.user.is_member) {%>
+        <div class="card">
+          <h2>Become a Member</h2>
+          <p>
+            Become a member of our private club and discover what you're truly
+            capable of.
+          </p>
+          <a href="/member" class="signup-button">Become Member</a>
+        </div>
+        <%} else if(locals.user && locals.user.is_member) {%>
+        <div class="card">
+          <h2>Welcome Back, Member!</h2>
+          <p>
+            Welcome back to the club! We hope you're ready to embrace the chaos
+            and discover your true self.
+          </p>
+        </div>
         <%} else {%>
 
         <div class="card">
@@ -57,16 +67,9 @@
             anything. Join our exclusive club and discover what you're truly
             capable of.
           </p>
-
-        <%}%>
-
-
-          <% if(locals.user) {%>
-          <a href="/member" class="signup-button">Become Member</a>
-          <%} else {%>
           <a href="/signup" class="signup-button">Sign Up</a>
-          <%}%>
         </div>
+        <%}%>
       </div>
     </main>
   </body>
