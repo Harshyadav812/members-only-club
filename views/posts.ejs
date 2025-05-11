@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FightClub</title>
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/posts.css" />
+    <link rel="stylesheet" href="/css/signup.css" />
+  </head>
+  <body>
+    <%- include("partials/navbar") %>
+    <main>
+      <% if (!locals.user) { %>
+      <p>
+        <a href="/login">Login</a> or <a href="/signup">create an account</a> to
+        view authors of the posts
+      </p>
+
+      <% } %> <% if(locals.user && locals.user.is_member) { %>
+      <section class="create-post-form">
+        <h2>Share Your Thoughts</h2>
+        <form action="/posts/create" method="POST" class="form">
+          <div class="form-group">
+            <label for="post-title">Title</label>
+            <input
+              type="text"
+              id="post-title"
+              name="title"
+              placeholder="Enter a title for your post"
+              required
+              autofocus
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="post-content">Content</label>
+            <textarea
+              id="post-content"
+              name="content"
+              rows="5"
+              placeholder="What's on your mind? Remember: The first rule of Fight Club is..."
+              required
+              class="form-control"
+            ></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Post</button>
+          </div>
+        </form>
+      </section>
+      <% } %>
+
+      <section class="posts-container">
+        <% if(locals.user) { %> <% posts.forEach(post => { %>
+        <article class="post">
+          <h2><%= post.title %></h2>
+          <p><%= post.content %></p>
+          <div class="post-meta">
+            <small
+              >Posted by: <%= post.first_name %> <%= post.last_name %></small
+            >
+            <small
+              >Created at: <%= new Date(post.created_at).toLocaleString('en-IN',
+              { timeZone: 'Asia/Kolkata', day: 'numeric', month: 'short', year:
+              'numeric', hour: '2-digit', minute: '2-digit' }) %></small
+            >
+          </div>
+        </article>
+        <% }); %> <% } else { %> <% posts.forEach(post => { %>
+        <article class="post">
+          <h2><%= post.title %></h2>
+          <p><%= post.content %></p>
+          <div class="post-meta">
+            <small>Posted by: -anonymous</small>
+            <small
+              >Created at: <%= new Date(post.created_at).toLocaleString('en-IN',
+              { timeZone: 'Asia/Kolkata', day: 'numeric', month: 'short', year:
+              'numeric', hour: '2-digit', minute: '2-digit' }) %></small
+            >
+          </div>
+        </article>
+        <% }); %> <% } %>
+      </section>
+    </main>
+  </body>
+</html>
