@@ -31,7 +31,7 @@ exports.signup_post = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10)
     await db.createUser(username, firstName, lastName, hashedPassword);
-    res.redirect("/");
+    res.redirect("/login");
   } catch (err) {
     console.error(err);
     res.status(500).send("Server error");
@@ -40,8 +40,23 @@ exports.signup_post = async (req, res) => {
 
 
 exports.login_get = async (req, res) => {
+  const errorMessages = req.flash("error");
   res.render("loginForm", {
-    errors: [],
+    errors: errorMessages,
     data: {}
   });
+}
+
+exports.becomeMember_get = async (req, res) => {
+  res.render("membershipForm",
+    { user: req.user }
+  );
+};
+
+exports.becomeMember_post = async (req, res) => {
+  if (req.body.memberCode === process.env.Membership_code) {
+    await db.updateMembershipStatus(req.user.id, true)
+    console.log("You're a member now");
+  }
+  res.redirect("/")
 }
