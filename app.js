@@ -2,8 +2,10 @@ const path = require("node:path");
 const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
+const flash = require("connect-flash");
 const initializePassport = require("./config/passport");
 const indexRouter = require("./routes/indexRouter");
+const postRouter = require("./routes/postRouter");
 require("dotenv").config();
 
 const app = express();
@@ -21,6 +23,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
+app.use(flash());
 // Passport
 initializePassport(passport);
 app.use(passport.initialize());
@@ -28,6 +31,7 @@ app.use(passport.session());
 
 // Routes
 app.use("/", indexRouter);
+app.use("/posts", postRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
