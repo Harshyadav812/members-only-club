@@ -4,6 +4,12 @@ const indexController = require("../controllers/indexController");
 const singupValidation = require("../validators/userValidators");
 const passport = require("passport");
 
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
 
 
 indexRouter.get("/", indexController.homepage);
@@ -13,7 +19,7 @@ indexRouter.get("/signup", indexController.signup_get);
 indexRouter.post("/signup", singupValidation, indexController.signup_post);
 indexRouter.get("/login", indexController.login_get);
 indexRouter.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
+  successRedirect: "/posts",
   failureRedirect: "/login",
   failureFlash: true
 }));
@@ -26,5 +32,8 @@ indexRouter.get("/log-out", (req, res, next) => {
     res.redirect("/");
   });
 });
+
+indexRouter.get("/member", ensureAuthenticated, indexController.becomeMember_get);
+indexRouter.post("/member", ensureAuthenticated, indexController.becomeMember_post);
 
 module.exports = indexRouter;
