@@ -12,19 +12,23 @@
 
     <main class="container">
       <div class="signup-container">
-        <div class="signup-card">
+        <div class="card">
           <h1>Welcome Back</h1>
           <p class="subtitle">Login to access your FightClub membership</p>
 
           <% if (errors && errors.length > 0) { %>
           <div class="error-messages">
-            <% errors.forEach(error => { %>
-            <p class="error-message"><%= error.msg %></p>
-            <% }) %>
+            <% if (Array.isArray(errors)) { %> <% errors.forEach(error => { %>
+            <p class="error-message">
+              <%= typeof error === 'object' ? error.msg : error %>
+            </p>
+            <% }) %> <% } else { %>
+            <p class="error-message"><%= errors %></p>
+            <% } %>
           </div>
           <% } %>
 
-          <form action="/login" method="post" class="signup-form">
+          <form action="/login" method="post" class="form">
             <div class="form-group">
               <label for="username">Username</label>
               <input
@@ -58,4 +62,4 @@
       </div>
     </main>
   </body>
-</html> 
+</html>
