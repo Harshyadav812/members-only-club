@@ -4,8 +4,12 @@
     <a href="/"> Welcome <%=user.first_name %></a>
   </div>
   <div class="nav-links">
+    <a href="/posts" class="nav-link">Posts</a>
     <a href="/log-out" class="nav-link">Logout</a>
+    <% if (!locals.user.is_member) { %>
+
     <a href="/member" class="nav-link">Become Member</a>
+    <% } %>
   </div>
 
   <%} else { %>
@@ -13,8 +17,9 @@
     <a href="/">FightClub</a>
   </div>
   <div class="nav-links">
+    <a href="/posts" class="nav-link">Posts</a>
     <a href="/login" class="nav-link">Login</a>
-    <a href="/signup" class="nav-link">Sign Up</a>
+    <a href="/signup" class="nav-link">SignUp</a>
   </div>
   <%}%>
 </nav>
